@@ -1,4 +1,5 @@
-// Copyright 2013 Bartosz Szczesny <bszcz@bszcz.eu> {bszcz.eu/license/MIT}
+// Copyright (c) 2013 Bartosz Szczesny. All rights reserved.
+// See LICENSE file or http://bszcz.eu/license/BSD/?year=2013
 
 package main
 

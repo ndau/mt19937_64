@@ -1,4 +1,5 @@
-// Copyright 2012-2013 Bartosz Szczesny <bszcz@bszcz.eu> {bszcz.eu/license/GPL}
+// Copyright (c) 2012-2013 Bartosz Szczesny. All rights reserved.
+// See LICENSE file or http://bszcz.eu/license/BSD/?year=2012-2013
 
 /*
 	note: "unsigned long long" = "uint64" therefore "genrand_int64()" --> "Uint64()"

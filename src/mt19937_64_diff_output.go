@@ -1,4 +1,5 @@
-// Copyright 2013 Bartosz Szczesny <bszcz@bszcz.eu> {bszcz.eu/license/MIT}
+// Copyright (c) 2013 Bartosz Szczesny. All rights reserved.
+// See LICENSE file or http://bszcz.eu/license/BSD/?year=2013
 
 /*
 	$ diff <(go run mt19937_64_check.go) ../data/mt19937-64.out.txt # should give no output
