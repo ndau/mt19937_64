@@ -1,5 +1,5 @@
-// Copyright (c) 2013 Bartosz Szczesny. All rights reserved.
-// See LICENSE file or http://bszcz.eu/license/BSD/?year=2013
+// Copyright (c) 2013 Bartosz Szczesny
+// LICENSE: The BSD 2-Clause License
 
 /*
 	$ diff <(go run mt19937_64_check.go) ../data/mt19937-64.out.txt # should give no output

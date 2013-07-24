@@ -1,5 +1,5 @@
-// Copyright (c) 2013 Bartosz Szczesny. All rights reserved.
-// See LICENSE file or http://bszcz.eu/license/BSD/?year=2013
+// Copyright (c) 2013 Bartosz Szczesny
+// LICENSE: The BSD 2-Clause License
 
 package main
 

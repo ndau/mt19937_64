@@ -1,5 +1,5 @@
-// Copyright (c) 2012-2013 Bartosz Szczesny. All rights reserved.
-// See LICENSE file or http://bszcz.eu/license/BSD/?year=2012-2013
+// Copyright (c) 2012-2013 Bartosz Szczesny
+// LICENSE: The BSD 2-Clause License
 
 /*
 	note: "unsigned long long" = "uint64" therefore "genrand_int64()" --> "Uint64()"
