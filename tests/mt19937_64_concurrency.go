@@ -2,6 +2,7 @@
 // LICENSE: The MIT License (MIT)
 
 // Check if "mt19937_64" random number generator is concurency safe.
+// Uses the "Source interface" from "math/rand".
 package main
 
 import (
@@ -11,17 +12,17 @@ import (
 	"time"
 )
 
-// Print random uint64 number from "mt19937_64".
+// Print random int63 number from "mt19937_64".
 // Reset random number generator if "i" is 13.
-func PrintUint64(i int, mt *mt64.MT, ch chan bool) {
+func PrintInt63(i int, mt *rand.Rand, ch chan bool) {
 	t := rand.Int() % 1000
 	time.Sleep(time.Duration(t))
 
 	if 13 == i {
-		mt.Init(12345)
+		mt.Seed(12345)
 		fmt.Printf("13 : (reset) \n")
 	} else {
-		fmt.Printf("%2d : %d \n", i, mt.Uint64())
+		fmt.Printf("%2d : %d \n", i, mt.Int63())
 	}
 
 	ch <- true
@@ -30,12 +31,12 @@ func PrintUint64(i int, mt *mt64.MT, ch chan bool) {
 func main() {
 	rand.Seed(time.Now().Unix())
 
-	mt := mt64.New()
-	mt.Init(12345)
+	mt := rand.New(mt64.New())
+	mt.Seed(12345)
 
 	ch := make(chan bool)
 	for i := 0; i < 21; i++ {
-		go PrintUint64(i, mt, ch)
+		go PrintInt63(i, mt, ch)
 	}
 	<-ch
 }

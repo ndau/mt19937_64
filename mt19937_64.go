@@ -1,5 +1,5 @@
 // Copyright (c) 2012-2013 Bartosz Szczesny
-// LICENSE: The BSD 2-Clause License
+// LICENSE: The MIT License (MIT)
 
 // 64bit Mersenne Twister (MT19937_64) written in Go.
 //
@@ -45,10 +45,12 @@ type MT struct {
 }
 
 func New() *MT {
-	return &MT{index: MT_VEC_LEN + 1}
+	return &MT{
+		index: MT_VEC_LEN + 1,
+	}
 }
 
-func (mt *MT) initLocked(seed uint64) {
+func (mt *MT) seedLocked(seed uint64) {
 	mt.mag[0] = MT_MAG_0
 	mt.mag[1] = MT_MAG_1
 
@@ -58,17 +60,23 @@ func (mt *MT) initLocked(seed uint64) {
 	}
 }
 
-// Initialise with a seed.
-func (mt *MT) Init(seed uint64) {
+// Seed with an uint64 integer.
+func (mt *MT) SeedByUint(seed uint64) {
 	mt.mutex.Lock()
-	mt.initLocked(seed)
+	mt.seedLocked(seed)
 	mt.mutex.Unlock()
 }
 
-// Initialise with an array.
-func (mt *MT) InitByArray(initKey []uint64) {
+// Seed with an int64 integer.
+// To implement the "Source interface" from "math/rand".
+func (mt *MT) Seed(seed int64) {
+	mt.SeedByUint(uint64(seed))
+}
+
+// Seed with an array.
+func (mt *MT) SeedByArray(initKey []uint64) {
 	mt.mutex.Lock()
-	mt.initLocked(MT_DEFAULT_SEED_ARRAY)
+	mt.seedLocked(MT_DEFAULT_SEED_ARRAY)
 
 	var initKeyLen uint64 = uint64(len(initKey))
 	var i uint64 = 1
@@ -111,7 +119,7 @@ func (mt *MT) InitByArray(initKey []uint64) {
 func (mt *MT) Uint64() uint64 {
 	mt.mutex.Lock()
 	if MT_VEC_LEN+1 == mt.index {
-		mt.initLocked(MT_DEFAULT_SEED)
+		mt.seedLocked(MT_DEFAULT_SEED)
 	}
 
 	var x uint64

@@ -18,7 +18,7 @@ func main() {
 	var i uint64
 
 	mt := mt64.New()
-	mt.InitByArray(initKey)
+	mt.SeedByArray(initKey)
 
 	fmt.Printf("1000 outputs of genrand64_int64()\n") // line from mt19937-64.out.txt
 	for i = 0; i < 1000; i++ {
