@@ -1,14 +1,14 @@
 // Copyright (c) 2012-2013 Bartosz Szczesny
 // LICENSE: The BSD 2-Clause License
 
-/*
-	note: "unsigned long long" = "uint64" therefore "genrand_int64()" --> "Uint64()"
-*/
-
+// 64bit Mersenne Twister (MT19937_64) written in Go.
+//
+// note: "unsigned long long" = "uint64" therefore "genrand_int64()" --> "Uint64()"
 package mt19937_64
 
 import "sync"
 
+// All magic numbers are defined here.
 const (
 	MT_VEC_LEN  uint64 = 312
 	MT_VEC_LEN2 uint64 = 156
@@ -36,6 +36,7 @@ const (
 	MT_REAL3_DIV float64 = 4503599627370496.0
 )
 
+// Main MT19937_64 data struct.
 type MT struct {
 	index uint64
 	mutex sync.Mutex
@@ -57,12 +58,14 @@ func (mt *MT) initLocked(seed uint64) {
 	}
 }
 
+// Initialise with a seed.
 func (mt *MT) Init(seed uint64) {
 	mt.mutex.Lock()
 	mt.initLocked(seed)
 	mt.mutex.Unlock()
 }
 
+// Initialise with an array.
 func (mt *MT) InitByArray(initKey []uint64) {
 	mt.mutex.Lock()
 	mt.initLocked(MT_DEFAULT_SEED_ARRAY)
@@ -104,6 +107,7 @@ func (mt *MT) InitByArray(initKey []uint64) {
 	mt.mutex.Unlock()
 }
 
+// Generate an integer on [0, 2^64 - 1].
 func (mt *MT) Uint64() uint64 {
 	mt.mutex.Lock()
 	if MT_VEC_LEN+1 == mt.index {
@@ -140,18 +144,22 @@ func (mt *MT) Uint64() uint64 {
 	return x
 }
 
+// Generate an integer on [0, 2^63 - 1].
 func (mt *MT) Int63() int64 {
 	return int64(mt.Uint64() >> 1)
 }
 
+// Generate a float on [0, 1].
 func (mt *MT) Real1() float64 {
 	return float64(mt.Uint64()>>11) / MT_REAL1_DIV
 }
 
+// Generate a float on [0, 1).
 func (mt *MT) Real2() float64 {
 	return float64(mt.Uint64()>>11) / MT_REAL2_DIV
 }
 
+// Generate a float on (0, 1).
 func (mt *MT) Real3() float64 {
 	return (float64(mt.Uint64()>>12) + 0.5) / MT_REAL3_DIV
 }

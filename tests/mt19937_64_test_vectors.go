@@ -1,17 +1,16 @@
 // Copyright (c) 2013 Bartosz Szczesny
-// LICENSE: The BSD 2-Clause License
+// LICENSE: The MIT License (MIT)
 
-/*
-	$ diff <(go run mt19937_64_check.go) ../data/mt19937-64.out.txt # should give no output
-
-	data source: http://www.math.sci.hiroshima-u.ac.jp/~m-mat/mt19937_64/mt19937-64.out.txt
-*/
-
+// Reproduce the test vectors from the original "mt19937_64" random number generator.
+//
+// $ diff <(go run mt19937_64_test_vectors.go) ../data/mt19937-64.out.txt # check if no diff
+//
+// data source: http://www.math.sci.hiroshima-u.ac.jp/~m-mat/mt19937_64/mt19937-64.out.txt
 package main
 
 import (
 	"fmt"
-	mt64 "mt19937_64"
+	mt64 "github.com/bszcz/mt19937_64"
 )
 
 func main() {

@@ -1,22 +1,25 @@
 // Copyright (c) 2013 Bartosz Szczesny
-// LICENSE: The BSD 2-Clause License
+// LICENSE: The MIT License (MIT)
 
+// Check if "mt19937_64" random number generator is concurency safe.
 package main
 
 import (
 	"fmt"
+	mt64 "github.com/bszcz/mt19937_64"
 	"math/rand"
-	mt64 "mt19937_64"
 	"time"
 )
 
+// Print random uint64 number from "mt19937_64".
+// Reset random number generator if "i" is 13.
 func PrintUint64(i int, mt *mt64.MT, ch chan bool) {
 	t := rand.Int() % 1000
 	time.Sleep(time.Duration(t))
 
 	if 13 == i {
 		mt.Init(12345)
-		fmt.Printf("-- \n")
+		fmt.Printf("13 : (reset) \n")
 	} else {
 		fmt.Printf("%2d : %d \n", i, mt.Uint64())
 	}
