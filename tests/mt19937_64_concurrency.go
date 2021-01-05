@@ -7,7 +7,7 @@ package main
 
 import (
 	"fmt"
-	mt64 "github.com/bszcz/mt19937_64"
+	mt64 "github.com/ndau/mt19937_64"
 	"math/rand"
 	"time"
 )
